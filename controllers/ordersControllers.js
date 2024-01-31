@@ -1,4 +1,5 @@
 const Orders = require("../models/Orders");
+const Products = require("../models/Product");
 
 module.exports = {
     getUserData: async (req, res) => {
@@ -8,7 +9,8 @@ module.exports = {
             const userOrders = await Orders.find({ userId })
                 .populate({
                     path: "productId",
-                    select: "-sizes -oldPrice -description -category"
+                    select: "-sizes -oldPrice -description -category",
+                    model: Products
                 })
                 .exec();
 
